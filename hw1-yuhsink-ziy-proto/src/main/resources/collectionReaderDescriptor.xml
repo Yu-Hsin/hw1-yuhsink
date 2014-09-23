@@ -21,7 +21,7 @@
       <nameValuePair>
         <name>fileName</name>
         <value>
-          <string>hw1.in</string>
+          <string>src/main/resources/data/sample.in</string>
         </value>
       </nameValuePair>
     </configurationParameterSettings>

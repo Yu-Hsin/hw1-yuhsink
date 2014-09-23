@@ -61,12 +61,12 @@ public class NameEntityAnnotator extends JCasAnnotator_ImplBase {
         int end = chunk.end();
         String gene = line.substring(start, end);
         NameEntity tmpNE = new NameEntity(aJCas);
-        // calculate whitespace-excluded offsets
+                
         String nospacegene = gene.replace(" ", "");
-        String nospaceline = line.replace(" ", "");
-        start = nospaceline.indexOf(nospacegene);
+        start = Utility.calOffset(gene, line);
         tmpNE.setBegin(start);
         tmpNE.setEnd(start + nospacegene.length() - 1);
+        
         tmpNE.setID(tmp.getID());
         tmpNE.setGeneName(gene);
         tmpNE.addToIndexes();

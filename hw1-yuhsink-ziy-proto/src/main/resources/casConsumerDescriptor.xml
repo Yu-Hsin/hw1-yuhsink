@@ -20,7 +20,7 @@
       <nameValuePair>
         <name>outputFile</name>
         <value>
-          <string>hw1-yuhsink.out</string>
+          <string>src/main/resources/data/hw1-yuhsink.out</string>
         </value>
       </nameValuePair>
     </configurationParameterSettings>
