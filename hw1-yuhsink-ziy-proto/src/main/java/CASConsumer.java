@@ -65,6 +65,12 @@ public class CASConsumer extends CasConsumer_ImplBase {
         e.printStackTrace();
       }
     }
+    try {
+      fop.close();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
 }
