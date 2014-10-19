@@ -65,6 +65,8 @@ public class CASConsumer extends CasConsumer_ImplBase {
         e.printStackTrace();
       }
     }
+  }
+  public void destroy() {
     try {
       fop.close();
     } catch (IOException e) {
@@ -72,5 +74,4 @@ public class CASConsumer extends CasConsumer_ImplBase {
       e.printStackTrace();
     }
   }
-
 }

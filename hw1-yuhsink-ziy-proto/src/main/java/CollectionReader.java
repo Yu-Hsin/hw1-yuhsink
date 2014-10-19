@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.collection.CollectionException;
@@ -21,21 +20,22 @@ import org.apache.uima.util.Progress;
 
 public class CollectionReader extends CollectionReader_ImplBase {
 
-  private ArrayList<BufferedReader> filelist;
+  // private ArrayList<BufferedReader> filelist;
+  private BufferedReader file;
 
-  private int fileindex;
+  // private int fileindex;
 
   /**
    * This method is called during initialization and it opens the input file.
    */
   @Override
   public void initialize() throws ResourceInitializationException {
-    filelist = new ArrayList<BufferedReader>();
-    fileindex = 0;
+    // filelist = new ArrayList<BufferedReader>();
+    // fileindex = 0;
     try {
-      BufferedReader file = new BufferedReader(new FileReader(
+      file = new BufferedReader(new FileReader(
               ((String) getConfigParameterValue("fileName")).toString()));
-      filelist.add(file);
+      // filelist.add(file);
 
     } catch (FileNotFoundException e) {
       e.printStackTrace();
@@ -55,7 +55,7 @@ public class CollectionReader extends CollectionReader_ImplBase {
   @Override
   public void getNext(CAS aCAS) throws IOException, CollectionException {
 
-    BufferedReader file = filelist.get(fileindex++);
+    // BufferedReader file = filelist.get(fileindex++);
     JCas jcas = null;
 
     try {
@@ -64,16 +64,15 @@ public class CollectionReader extends CollectionReader_ImplBase {
       e.printStackTrace();
     }
     String line;
-
-    while ((line = file.readLine()) != null) {
-      String ID, sentence;
-      ID = line.substring(0, line.indexOf(" "));
-      sentence = line.substring(line.indexOf(" ") + 1);
-      singleSentence tmp = new singleSentence(jcas);
-      tmp.setID(ID);
-      tmp.setSentence(sentence);
-      tmp.addToIndexes();
-    }
+    
+    line = file.readLine();
+    String ID, sentence;
+    ID = line.substring(0, line.indexOf(" "));
+    sentence = line.substring(line.indexOf(" ") + 1);
+    singleSentence tmp = new singleSentence(jcas);
+    tmp.setID(ID);
+    tmp.setSentence(sentence);
+    tmp.addToIndexes();
   }
 
   /**
@@ -116,7 +115,7 @@ public class CollectionReader extends CollectionReader_ImplBase {
   @Override
   public boolean hasNext() throws IOException, CollectionException {
     // TODO Auto-generated method stub
-    return fileindex < filelist.size();
+    return file.ready();// fileindex < filelist.size();
   }
 
 }
